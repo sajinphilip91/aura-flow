@@ -243,7 +243,8 @@ const ExerciseSession = ({ exercise, onClose }) => {
             {/* Audio Track */}
             {!isMuted && isActive && (
                 <audio
-                    src="/ambient-loop.mp3"
+                    ref={(el) => { if (el) el.volume = 0.3; }} // Set volume to 30%
+                    src="/Echoes of Eternity.mp3"
                     autoPlay
                     loop
                     style={{ display: 'none' }}
