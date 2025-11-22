@@ -30,15 +30,16 @@ const ExerciseSession = ({ exercise, onClose }) => {
 
     // Voice Guidance Logic
     useEffect(() => {
-        if (isMuted || !isActive) return;
+        if (isMuted || (!isActive && !isGetReady)) return; // Allow playing if isGetReady is true even if not active yet? No, wait. isActive is set to true AFTER get ready.
+        // Actually, isGetReady is true initially, but isActive is false.
+        // We need to allow playing if isGetReady is true.
 
         let audioFile = null;
 
         if (isGetReady) {
-            // Play 'Relax' only once at the very start
-            if (timeLeft === 5) {
-                audioFile = '/Relax.mp3';
-            }
+            // Play 'Relax' when entering Get Ready state
+            // We use a specific condition to avoid re-playing on every tick if we were tracking timeLeft
+            audioFile = '/Relax.mp3';
         } else {
             switch (phaseName) {
                 case 'Breathe In':
@@ -57,11 +58,15 @@ const ExerciseSession = ({ exercise, onClose }) => {
 
         if (audioFile) {
             if (voiceRef.current) {
-                voiceRef.current.src = audioFile;
-                voiceRef.current.play().catch(e => console.log("Audio play failed:", e));
+                // Avoid re-playing the same file if it's already playing (especially for Relax during countdown)
+                const currentSrc = voiceRef.current.getAttribute('src');
+                if (currentSrc !== audioFile || voiceRef.current.paused) {
+                    voiceRef.current.src = audioFile;
+                    voiceRef.current.play().catch(e => console.log("Audio play failed:", e));
+                }
             }
         }
-    }, [phaseName, isGetReady, isMuted, isActive, timeLeft]); // Added timeLeft to trigger relax only at start
+    }, [phaseName, isGetReady, isMuted]); // Removed timeLeft and isActive check for GetReady
 
     // Initialize remaining time when step changes
     useEffect(() => {
