@@ -29,11 +29,14 @@ body {
   font-family: var(--font-main);
   background-color: var(--color-bg);
   color: var(--color-text);
-  min-height: 100vh;
+  height: 100dvh;
+  /* Use dynamic viewport height */
+  width: 100vw;
+  overflow: hidden;
+  /* Prevent body scroll */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,9 +46,14 @@ body {
   max-width: 1200px;
   padding: 2rem;
   box-sizing: border-box;
-  min-height: 100vh;
+  height: 100%;
+  /* Fill body */
+  overflow-y: auto;
+  /* Allow internal scroll if needed */
   display: flex;
   flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scroll on iOS */
 }
 
 @media (max-width: 600px) {
