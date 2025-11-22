@@ -41,22 +41,33 @@ const ExerciseSession = ({ exercise, onClose }) => {
         }
     }, [isGetReady, timeLeft]);
 
-    // Cycle Timer with Pause/Resume
+    // Cycle Timer with Pause/Resume and Active Countdown
     useEffect(() => {
-        if (!isActive || isGetReady || remainingTime <= 0) return;
+        if (!isActive || isGetReady) return;
 
+        let animationFrameId;
         const startTime = Date.now();
+        const initialRemaining = remainingTime;
 
-        timerRef.current = setTimeout(() => {
-            setCycleIndex((prev) => (prev + 1) % cycle.length);
-        }, remainingTime);
-
-        return () => {
-            clearTimeout(timerRef.current);
+        const updateTimer = () => {
             const elapsed = Date.now() - startTime;
-            setRemainingTime((prev) => Math.max(0, prev - elapsed));
+            const newRemaining = Math.max(0, initialRemaining - elapsed);
+
+            setRemainingTime(newRemaining);
+
+            if (newRemaining <= 0) {
+                const nextIndex = (cycleIndex + 1) % cycle.length;
+                setCycleIndex(nextIndex);
+                setRemainingTime(cycle[nextIndex].duration * 1000); // Update time immediately with next phase
+            } else {
+                animationFrameId = requestAnimationFrame(updateTimer);
+            }
         };
-    }, [isActive, isGetReady, cycleIndex, remainingTime]);
+
+        animationFrameId = requestAnimationFrame(updateTimer);
+
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [isActive, isGetReady, cycleIndex]); // Removed remainingTime from dependency to avoid infinite loop reset
 
     const togglePause = () => {
         setIsActive(!isActive);
