@@ -70,6 +70,13 @@ const ExerciseSession = ({ exercise, onClose }) => {
     }, [isActive, isGetReady, cycleIndex]); // Removed remainingTime from dependency to avoid infinite loop reset
 
     const togglePause = () => {
+        if (!isActive) {
+            // Resuming: Restart the breathing technique from the beginning
+            setCycleIndex(0);
+            if (cycle && cycle.length > 0) {
+                setRemainingTime(cycle[0].duration * 1000);
+            }
+        }
         setIsActive(!isActive);
     };
 
