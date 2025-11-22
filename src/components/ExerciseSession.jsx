@@ -14,9 +14,9 @@ const ExerciseSession = ({ exercise, onClose }) => {
 
     // Construct the cycle with explicit scales
     const cycle = React.useMemo(() => {
-        const c = [{ name: 'Inhale', duration: pattern.inhale, scale: 1.5 }];
+        const c = [{ name: 'Breathe In', duration: pattern.inhale, scale: 1.5 }];
         if (pattern.hold > 0) c.push({ name: 'Hold', duration: pattern.hold, scale: 1.5 });
-        c.push({ name: 'Exhale', duration: pattern.exhale, scale: 1 });
+        c.push({ name: 'Breathe Out', duration: pattern.exhale, scale: 1 });
         if (pattern.hold2 > 0) c.push({ name: 'Hold', duration: pattern.hold2, scale: 1 });
         return c;
     }, [pattern]);
