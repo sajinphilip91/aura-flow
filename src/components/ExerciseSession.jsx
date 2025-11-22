@@ -28,37 +28,28 @@ const ExerciseSession = ({ exercise, onClose }) => {
     const currentScale = isGetReady ? 1 : currentStep.scale;
     const currentDuration = currentStep.duration;
 
-    // Voice Guidance Logic
+    // Voice Guidance Logic - Phase Changes
     useEffect(() => {
-        if (isMuted || (!isActive && !isGetReady)) return; // Allow playing if isGetReady is true even if not active yet? No, wait. isActive is set to true AFTER get ready.
-        // Actually, isGetReady is true initially, but isActive is false.
-        // We need to allow playing if isGetReady is true.
+        if (isMuted || !isActive) return;
 
         let audioFile = null;
-
-        if (isGetReady) {
-            // Play 'Relax' when entering Get Ready state
-            // We use a specific condition to avoid re-playing on every tick if we were tracking timeLeft
-            audioFile = '/Relax.mp3';
-        } else {
-            switch (phaseName) {
-                case 'Breathe In':
-                    audioFile = '/breathe in.mp3';
-                    break;
-                case 'Breathe Out':
-                    audioFile = '/breathe out.mp3';
-                    break;
-                case 'Hold':
-                    audioFile = '/hold.mp3';
-                    break;
-                default:
-                    break;
-            }
+        switch (phaseName) {
+            case 'Breathe In':
+                audioFile = '/breathe%20in.mp3';
+                break;
+            case 'Breathe Out':
+                audioFile = '/breathe%20out.mp3';
+                break;
+            case 'Hold':
+                audioFile = '/hold.mp3';
+                break;
+            default:
+                break;
         }
 
         if (audioFile) {
             if (voiceRef.current) {
-                // Avoid re-playing the same file if it's already playing (especially for Relax during countdown)
+                // Only play if it's a different file or not playing
                 const currentSrc = voiceRef.current.getAttribute('src');
                 if (currentSrc !== audioFile || voiceRef.current.paused) {
                     voiceRef.current.src = audioFile;
@@ -66,7 +57,21 @@ const ExerciseSession = ({ exercise, onClose }) => {
                 }
             }
         }
-    }, [phaseName, isGetReady, isMuted]); // Removed timeLeft and isActive check for GetReady
+    }, [phaseName, isMuted, isActive]);
+
+    // Voice Guidance Logic - Get Ready / Relax
+    useEffect(() => {
+        if (isGetReady && !isMuted) {
+            // Small delay to ensure play works after navigation
+            const timer = setTimeout(() => {
+                if (voiceRef.current) {
+                    voiceRef.current.src = '/Relax.mp3';
+                    voiceRef.current.play().catch(e => console.log("Relax play failed:", e));
+                }
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [isGetReady, isMuted]);
 
     // Initialize remaining time when step changes
     useEffect(() => {
@@ -332,7 +337,7 @@ const ExerciseSession = ({ exercise, onClose }) => {
                 <>
                     <audio
                         ref={(el) => { if (el) el.volume = 0.3; }} // Background music volume
-                        src="/Echoes of Eternity.mp3"
+                        src="/Echoes%20of%20Eternity.mp3"
                         autoPlay
                         loop
                         style={{ display: 'none' }}
