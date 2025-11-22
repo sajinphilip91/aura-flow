@@ -54,6 +54,15 @@ body {
   flex-direction: column;
   -webkit-overflow-scrolling: touch;
   /* Smooth scroll on iOS */
+  scrollbar-width: none;
+  /* Hide scrollbar Firefox */
+  -ms-overflow-style: none;
+  /* Hide scrollbar IE/Edge */
+}
+
+#root::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar Chrome/Safari */
 }
 
 @media (max-width: 600px) {
