@@ -6,12 +6,12 @@ const ExerciseCard = ({ title, benefit, color, onClick }) => {
             className="glass-panel exercise-card"
             onClick={onClick}
             style={{
-                padding: '1.2rem 1.5rem',
+                padding: 'clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 3vw, 1.5rem)',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                minHeight: '80px',
+                minHeight: 'clamp(60px, 10vw, 80px)',
                 cursor: 'pointer',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 position: 'relative',

@@ -38,9 +38,9 @@ const LandingPage = ({ onSelectExercise }) => {
             {/* Hero Section */}
             <section style={{
                 textAlign: 'center',
-                padding: '4rem 0',
+                padding: 'clamp(1.5rem, 5vw, 4rem) 0',
                 position: 'relative',
-                marginBottom: '2rem'
+                marginBottom: 'clamp(1rem, 3vw, 2rem)'
             }}>
                 <div style={{
                     position: 'absolute',
@@ -56,7 +56,7 @@ const LandingPage = ({ onSelectExercise }) => {
                 }} />
 
                 <h1 style={{
-                    fontSize: 'clamp(2.5rem, 8vw, 3.5rem)',
+                    fontSize: 'clamp(2rem, 8vw, 3.5rem)',
                     fontWeight: 700,
                     marginBottom: '1rem',
                     letterSpacing: '-0.02em'
@@ -77,7 +77,7 @@ const LandingPage = ({ onSelectExercise }) => {
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.5rem',
+                gap: 'clamp(0.8rem, 2vw, 1.5rem)',
                 padding: '0 1rem',
                 maxWidth: '500px',
                 margin: '0 auto'
