@@ -159,7 +159,7 @@ const ExerciseSession = ({ exercise, onClose }) => {
                             animationPlayState: isActive ? 'running' : 'paused',
                             position: 'relative',
                             zIndex: 1,
-                            mixBlendMode: 'screen' // Removes black background
+                            mixBlendMode: 'screen', // Removes black background
                         }}
                     />
                     <span style={{
