@@ -160,6 +160,9 @@ const ExerciseSession = ({ exercise, onClose }) => {
                             position: 'relative',
                             zIndex: 1,
                             mixBlendMode: 'screen', // Removes black background
+                            // Mask to fade out the rectangular edges
+                            WebkitMaskImage: 'radial-gradient(closest-side, black 40%, transparent 100%)',
+                            maskImage: 'radial-gradient(closest-side, black 40%, transparent 100%)'
                         }}
                     />
                     <span style={{
