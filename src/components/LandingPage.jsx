@@ -32,7 +32,7 @@ const exercises = [
     }
 ];
 
-const LandingPage = ({ onSelectExercise }) => {
+const LandingPage = ({ onSelectExercise, onOpenDisclaimer }) => {
     return (
         <div className="animate-fade-in" style={{ width: '100%', paddingBottom: '2rem' }}>
             {/* Hero Section */}
@@ -91,6 +91,29 @@ const LandingPage = ({ onSelectExercise }) => {
                         onClick={() => onSelectExercise(ex)}
                     />
                 ))}
+            </div>
+
+            {/* Footer */}
+            <div style={{
+                textAlign: 'center',
+                marginTop: '3rem',
+                paddingBottom: '1rem'
+            }}>
+                <button
+                    onClick={onOpenDisclaimer}
+                    style={{
+                        fontSize: '0.8rem',
+                        color: 'var(--color-text-secondary)',
+                        textDecoration: 'underline',
+                        opacity: 0.6,
+                        cursor: 'pointer',
+                        background: 'none',
+                        border: 'none',
+                        padding: '0.5rem'
+                    }}
+                >
+                    Disclaimer
+                </button>
             </div>
         </div>
     );

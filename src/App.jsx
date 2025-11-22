@@ -33,7 +33,10 @@ function App() {
       )}
 
       {currentView === 'landing' && (
-        <LandingPage onSelectExercise={handleSelectExercise} />
+        <LandingPage
+          onSelectExercise={handleSelectExercise}
+          onOpenDisclaimer={() => setShowDisclaimer(true)}
+        />
       )}
 
       {currentView === 'session' && selectedExercise && (
