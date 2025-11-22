@@ -13,7 +13,20 @@ const ExerciseSession = ({ exercise, onClose }) => {
     const voiceRef = useRef(null); // Ref for voice guidance
     const { pattern, color } = exercise;
 
-    // ... (cycle useMemo) ...
+    // Construct the cycle with explicit scales
+    const cycle = React.useMemo(() => {
+        const c = [{ name: 'Breathe In', duration: pattern.inhale, scale: 1.5 }];
+        if (pattern.hold > 0) c.push({ name: 'Hold', duration: pattern.hold, scale: 1.5 });
+        c.push({ name: 'Breathe Out', duration: pattern.exhale, scale: 1 });
+        if (pattern.hold2 > 0) c.push({ name: 'Hold', duration: pattern.hold2, scale: 1 });
+        return c;
+    }, [pattern]);
+
+    // Derived State for Rendering (Moved up for useEffect access)
+    const currentStep = cycle[cycleIndex];
+    const phaseName = isGetReady ? 'Starts in' : currentStep.name;
+    const currentScale = isGetReady ? 1 : currentStep.scale;
+    const currentDuration = currentStep.duration;
 
     // Voice Guidance Logic
     useEffect(() => {
@@ -49,16 +62,6 @@ const ExerciseSession = ({ exercise, onClose }) => {
             }
         }
     }, [phaseName, isGetReady, isMuted, isActive, timeLeft]); // Added timeLeft to trigger relax only at start
-
-    // ... (rest of the component) ...
-
-    const cycle = React.useMemo(() => {
-        const c = [{ name: 'Breathe In', duration: pattern.inhale, scale: 1.5 }];
-        if (pattern.hold > 0) c.push({ name: 'Hold', duration: pattern.hold, scale: 1.5 });
-        c.push({ name: 'Breathe Out', duration: pattern.exhale, scale: 1 });
-        if (pattern.hold2 > 0) c.push({ name: 'Hold', duration: pattern.hold2, scale: 1 });
-        return c;
-    }, [pattern]);
 
     // Initialize remaining time when step changes
     useEffect(() => {
@@ -121,11 +124,7 @@ const ExerciseSession = ({ exercise, onClose }) => {
         setIsActive(!isActive);
     };
 
-    // Derived State for Rendering
-    const currentStep = cycle[cycleIndex];
-    const phaseName = isGetReady ? 'Starts in' : currentStep.name;
-    const currentScale = isGetReady ? 1 : currentStep.scale;
-    const currentDuration = currentStep.duration; // Use currentStep.duration for transition
+
 
     return (
         <div className="animate-fade-in" style={{
