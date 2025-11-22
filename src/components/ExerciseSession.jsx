@@ -204,19 +204,17 @@ const ExerciseSession = ({ exercise, onClose }) => {
                         }}>
                             {isGetReady ? timeLeft : Math.ceil(remainingTime / 1000)}
                         </span>
-                        {!isGetReady && (
-                            <span style={{
-                                fontSize: '1.5rem',
-                                fontWeight: 400,
-                                color: 'rgba(255, 255, 255, 0.8)',
-                                marginTop: '0.5rem',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.1em',
-                                textShadow: '0 2px 10px rgba(0,0,0,0.5)'
-                            }}>
-                                {phaseName}
-                            </span>
-                        )}
+                        <span style={{
+                            fontSize: '1.5rem',
+                            fontWeight: 400,
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            marginTop: '0.5rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.1em',
+                            textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                        }}>
+                            {phaseName}
+                        </span>
                     </div>
                 </div>
             </div>
