@@ -48,6 +48,12 @@ body {
   flex-direction: column;
 }
 
+@media (max-width: 600px) {
+  #root {
+    padding: 1rem;
+  }
+}
+
 /* Utilities */
 .glass-panel {
   background: var(--glass-bg);

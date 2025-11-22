@@ -56,7 +56,7 @@ const LandingPage = ({ onSelectExercise }) => {
                 }} />
 
                 <h1 style={{
-                    fontSize: '3.5rem',
+                    fontSize: 'clamp(2.5rem, 8vw, 3.5rem)',
                     fontWeight: 700,
                     marginBottom: '1rem',
                     letterSpacing: '-0.02em'

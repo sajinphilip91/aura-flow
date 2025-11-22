@@ -106,8 +106,8 @@ const ExerciseSession = ({ exercise, onClose }) => {
 
                 {/* Breathing Blob Image */}
                 <div style={{
-                    width: '600px',
-                    height: '600px',
+                    width: 'min(600px, 90vw)',
+                    height: 'min(600px, 90vw)',
                     position: 'relative',
                     display: 'flex',
                     justifyContent: 'center',
@@ -117,8 +117,8 @@ const ExerciseSession = ({ exercise, onClose }) => {
                     {/* Inner Border Line */}
                     <div style={{
                         position: 'absolute',
-                        width: '480px',
-                        height: '480px',
+                        width: 'min(480px, 72vw)',
+                        height: 'min(480px, 72vw)',
                         borderRadius: '45% 55% 70% 30% / 50% 30% 70% 50%',
                         background: 'linear-gradient(135deg, #00f2ff 0%, #00c6ff 50%, #9d00ff 100%)',
                         padding: '1px',
@@ -134,8 +134,8 @@ const ExerciseSession = ({ exercise, onClose }) => {
                     {/* Outer Border Line */}
                     <div style={{
                         position: 'absolute',
-                        width: '520px',
-                        height: '520px',
+                        width: 'min(520px, 78vw)',
+                        height: 'min(520px, 78vw)',
                         borderRadius: '50% 50% 30% 70% / 50% 70% 30% 50%',
                         background: 'linear-gradient(135deg, #00f2ff 0%, #00c6ff 50%, #9d00ff 100%)',
                         padding: '1px',
