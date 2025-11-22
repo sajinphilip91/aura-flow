@@ -156,3 +156,55 @@ button {
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
 }
+
+/* Disclaimer Modal */
+.disclaimer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(1, 8, 24, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.disclaimer-modal {
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  background: #010818;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 600px) {
+  .disclaimer-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .disclaimer-modal {
+    max-width: 100%;
+    border-radius: 24px 24px 0 0;
+    border-bottom: none;
+    padding-bottom: 3rem;
+    animation: slide-up 0.3s ease-out;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

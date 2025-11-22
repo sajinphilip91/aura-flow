@@ -2,27 +2,8 @@ import React from 'react';
 
 const DisclaimerModal = ({ onContinue }) => {
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0, left: 0, right: 0, bottom: 0,
-            background: 'rgba(1, 8, 24, 0.95)',
-            backdropFilter: 'blur(10px)',
-            zIndex: 200,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '2rem'
-        }}>
-            <div className="glass-panel" style={{
-                maxWidth: '400px',
-                width: '100%',
-                padding: '2rem',
-                textAlign: 'center',
-                borderRadius: '24px',
-                border: '1px solid var(--glass-border)',
-                background: 'var(--glass-bg)',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
-            }}>
+        <div className="disclaimer-overlay">
+            <div className="glass-panel disclaimer-modal">
                 <h2 style={{
                     fontSize: '1.5rem',
                     marginBottom: '1rem',

@@ -9,15 +9,10 @@ function App() {
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
 
-  useEffect(() => {
-    const hasSeen = localStorage.getItem('hasSeenDisclaimer');
-    if (hasSeen) {
-      setShowDisclaimer(false);
-    }
-  }, []);
+  // Removed useEffect to show disclaimer every time
 
   const handleDisclaimerContinue = () => {
-    localStorage.setItem('hasSeenDisclaimer', 'true');
+    // localStorage.setItem('hasSeenDisclaimer', 'true'); // Don't save
     setShowDisclaimer(false);
   };
 
