@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const ExerciseSession = ({ exercise, onClose }) => {
     const [isGetReady, setIsGetReady] = useState(true);
-    const [timeLeft, setTimeLeft] = useState(3); // 3s countdown
+    const [timeLeft, setTimeLeft] = useState(5); // 5s countdown
     const [isActive, setIsActive] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [cycleIndex, setCycleIndex] = useState(0);
@@ -71,7 +71,9 @@ const ExerciseSession = ({ exercise, onClose }) => {
 
     const togglePause = () => {
         if (!isActive) {
-            // Resuming: Restart the breathing technique from the beginning
+            // Resuming: Restart the breathing technique from the beginning with countdown
+            setIsGetReady(true);
+            setTimeLeft(5);
             setCycleIndex(0);
             if (cycle && cycle.length > 0) {
                 setRemainingTime(cycle[0].duration * 1000);
@@ -82,7 +84,7 @@ const ExerciseSession = ({ exercise, onClose }) => {
 
     // Derived State for Rendering
     const currentStep = cycle[cycleIndex];
-    const phaseName = isGetReady ? 'Get Ready' : currentStep.name;
+    const phaseName = isGetReady ? 'Starts in' : currentStep.name;
     const currentScale = isGetReady ? 1 : currentStep.scale;
     const currentDuration = currentStep.duration; // Use currentStep.duration for transition
 
