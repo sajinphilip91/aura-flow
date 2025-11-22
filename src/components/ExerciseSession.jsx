@@ -10,9 +10,48 @@ const ExerciseSession = ({ exercise, onClose }) => {
     const [remainingTime, setRemainingTime] = useState(0);
 
     const timerRef = useRef(null);
+    const voiceRef = useRef(null); // Ref for voice guidance
     const { pattern, color } = exercise;
 
-    // Construct the cycle with explicit scales
+    // ... (cycle useMemo) ...
+
+    // Voice Guidance Logic
+    useEffect(() => {
+        if (isMuted || !isActive) return;
+
+        let audioFile = null;
+
+        if (isGetReady) {
+            // Play 'Relax' only once at the very start
+            if (timeLeft === 5) {
+                audioFile = '/Relax.mp3';
+            }
+        } else {
+            switch (phaseName) {
+                case 'Breathe In':
+                    audioFile = '/breathe in.mp3';
+                    break;
+                case 'Breathe Out':
+                    audioFile = '/breathe out.mp3';
+                    break;
+                case 'Hold':
+                    audioFile = '/hold.mp3';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if (audioFile) {
+            if (voiceRef.current) {
+                voiceRef.current.src = audioFile;
+                voiceRef.current.play().catch(e => console.log("Audio play failed:", e));
+            }
+        }
+    }, [phaseName, isGetReady, isMuted, isActive, timeLeft]); // Added timeLeft to trigger relax only at start
+
+    // ... (rest of the component) ...
+
     const cycle = React.useMemo(() => {
         const c = [{ name: 'Breathe In', duration: pattern.inhale, scale: 1.5 }];
         if (pattern.hold > 0) c.push({ name: 'Hold', duration: pattern.hold, scale: 1.5 });
@@ -284,15 +323,21 @@ const ExerciseSession = ({ exercise, onClose }) => {
                 </button>
             </div>
 
-            {/* Audio Track */}
+            {/* Audio Tracks */}
             {!isMuted && isActive && (
-                <audio
-                    ref={(el) => { if (el) el.volume = 0.3; }} // Set volume to 30%
-                    src="/Echoes of Eternity.mp3"
-                    autoPlay
-                    loop
-                    style={{ display: 'none' }}
-                />
+                <>
+                    <audio
+                        ref={(el) => { if (el) el.volume = 0.3; }} // Background music volume
+                        src="/Echoes of Eternity.mp3"
+                        autoPlay
+                        loop
+                        style={{ display: 'none' }}
+                    />
+                    <audio
+                        ref={voiceRef}
+                        style={{ display: 'none' }}
+                    />
+                </>
             )}
         </div >
     );
