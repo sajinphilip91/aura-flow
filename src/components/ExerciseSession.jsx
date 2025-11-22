@@ -165,16 +165,39 @@ const ExerciseSession = ({ exercise, onClose }) => {
                             maskImage: 'radial-gradient(closest-side, black 40%, transparent 100%)'
                         }}
                     />
-                    <span style={{
+                    <div style={{
                         position: 'absolute',
-                        fontSize: '2rem',
-                        fontWeight: 600,
-                        color: 'white',
-                        textShadow: '0 2px 10px rgba(0,0,0,0.8)',
-                        zIndex: 2
+                        zIndex: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        pointerEvents: 'none'
                     }}>
-                        {isGetReady ? timeLeft : phaseName}
-                    </span>
+                        <span style={{
+                            fontSize: '5rem',
+                            fontWeight: 200, // Thin font
+                            color: 'white',
+                            lineHeight: 1,
+                            fontVariantNumeric: 'tabular-nums', // Prevents jumping
+                            textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                        }}>
+                            {isGetReady ? timeLeft : Math.ceil(remainingTime / 1000)}
+                        </span>
+                        {!isGetReady && (
+                            <span style={{
+                                fontSize: '1.5rem',
+                                fontWeight: 400,
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                marginTop: '0.5rem',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.1em',
+                                textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                            }}>
+                                {phaseName}
+                            </span>
+                        )}
+                    </div>
                 </div>
             </div>
 

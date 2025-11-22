@@ -21,7 +21,7 @@ const exercises = [
         title: 'Harmonized',
         benefit: 'Reduce Anxiety',
         color: 'var(--color-accent-lavender)',
-        pattern: { inhale: 5, hold: 0, exhale: 5, hold2: 0 }
+        pattern: { inhale: 4, hold: 2, exhale: 4, hold2: 0 }
     },
     {
         id: 'relax',
