@@ -1,11 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './index.css'
 import LandingPage from './components/LandingPage'
 import ExerciseSession from './components/ExerciseSession'
+import DisclaimerModal from './components/DisclaimerModal'
 
 function App() {
   const [currentView, setCurrentView] = useState('landing'); // 'landing' | 'session'
   const [selectedExercise, setSelectedExercise] = useState(null);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
+
+  useEffect(() => {
+    const hasSeen = localStorage.getItem('hasSeenDisclaimer');
+    if (hasSeen) {
+      setShowDisclaimer(false);
+    }
+  }, []);
+
+  const handleDisclaimerContinue = () => {
+    localStorage.setItem('hasSeenDisclaimer', 'true');
+    setShowDisclaimer(false);
+  };
 
   const handleSelectExercise = (exercise) => {
     setSelectedExercise(exercise);
@@ -19,6 +33,10 @@ function App() {
 
   return (
     <div className="app-container">
+      {showDisclaimer && (
+        <DisclaimerModal onContinue={handleDisclaimerContinue} />
+      )}
+
       {currentView === 'landing' && (
         <LandingPage onSelectExercise={handleSelectExercise} />
       )}
