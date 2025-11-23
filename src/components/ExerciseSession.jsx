@@ -188,7 +188,7 @@ const ExerciseSession = ({ exercise, onClose }) => {
                         width: 'min(480px, 72vw)',
                         height: 'min(480px, 72vw)',
                         borderRadius: '45% 55% 70% 30% / 50% 30% 70% 50%',
-                        background: 'linear-gradient(135deg, #00f2ff 0%, #00c6ff 50%, #9d00ff 100%)',
+                        background: exercise.color, // Use exercise color
                         padding: '1px',
                         WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                         WebkitMaskComposite: 'xor',
@@ -205,7 +205,7 @@ const ExerciseSession = ({ exercise, onClose }) => {
                         width: 'min(520px, 78vw)',
                         height: 'min(520px, 78vw)',
                         borderRadius: '50% 50% 30% 70% / 50% 70% 30% 50%',
-                        background: 'linear-gradient(135deg, #00f2ff 0%, #00c6ff 50%, #9d00ff 100%)',
+                        background: exercise.color, // Use exercise color
                         padding: '1px',
                         WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                         WebkitMaskComposite: 'xor',
@@ -233,6 +233,19 @@ const ExerciseSession = ({ exercise, onClose }) => {
                             maskImage: 'radial-gradient(closest-side, black 40%, transparent 100%)'
                         }}
                     />
+
+                    {/* Tint Overlay */}
+                    <div style={{
+                        position: 'absolute',
+                        top: '10%', left: '10%', right: '10%', bottom: '10%', // Constrain to center
+                        background: exercise.color,
+                        mixBlendMode: 'color',
+                        opacity: 0.6,
+                        zIndex: 1,
+                        pointerEvents: 'none',
+                        borderRadius: '50%',
+                        filter: 'blur(20px)'
+                    }} />
                     <div style={{
                         position: 'absolute',
                         zIndex: 2,
