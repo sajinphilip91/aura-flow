@@ -6,28 +6,28 @@ const exercises = [
         id: 'box',
         title: 'Box Breathing',
         benefit: 'Reduce Stress',
-        color: 'var(--color-accent-cyan)',
+        color: '#00f2ff',
         pattern: { inhale: 4, hold: 4, exhale: 4, hold2: 4 }
     },
     {
         id: 'equal',
         title: 'Equal Breathing',
         benefit: 'Relax & Focus',
-        color: 'var(--color-accent-green)',
+        color: '#00ff9d',
         pattern: { inhale: 4, hold: 0, exhale: 4, hold2: 0 }
     },
     {
         id: 'harmonized',
         title: 'Harmonized',
         benefit: 'Reduce Anxiety',
-        color: 'var(--color-accent-lavender)',
+        color: '#d580ff',
         pattern: { inhale: 4, hold: 2, exhale: 4, hold2: 0 }
     },
     {
         id: 'relax',
         title: 'Relax Breathing',
         benefit: 'Improve Sleep',
-        color: 'var(--color-accent-indigo)',
+        color: '#5e5ce6',
         pattern: { inhale: 4, hold: 7, exhale: 8, hold2: 0 }
     }
 ];

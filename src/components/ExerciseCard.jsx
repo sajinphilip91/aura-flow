@@ -18,8 +18,9 @@ const ExerciseCard = ({ title, benefit, color, onClick }) => {
                 overflow: 'hidden'
             }}
             onMouseEnter={(e) => {
+                const opacity = title === 'Relax Breathing' ? '10' : '22';
                 e.currentTarget.style.transform = 'translateY(-3px)';
-                e.currentTarget.style.boxShadow = `0 8px 24px 0 ${color}22`;
+                e.currentTarget.style.boxShadow = `0 8px 24px 0 ${color}${opacity}`;
             }}
             onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';

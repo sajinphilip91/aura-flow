@@ -230,7 +230,8 @@ const ExerciseSession = ({ exercise, onClose }) => {
                             mixBlendMode: 'screen', // Removes black background
                             // Mask to fade out the rectangular edges
                             WebkitMaskImage: 'radial-gradient(closest-side, black 40%, transparent 100%)',
-                            maskImage: 'radial-gradient(closest-side, black 40%, transparent 100%)'
+                            maskImage: 'radial-gradient(closest-side, black 40%, transparent 100%)',
+                            filter: `drop-shadow(0 0 ${exercise.title === 'Relax Breathing' ? '10px' : '20px'} ${exercise.color}${exercise.title === 'Relax Breathing' ? '80' : ''})` // Adjust glow for Relax
                         }}
                     />
 
