@@ -4,10 +4,10 @@
   --color-text: #ffffff;
   --color-text-secondary: rgba(255, 255, 255, 0.7);
 
-  --color-accent-cyan: #a5f3fc;
-  --color-accent-green: #6ee7b7;
-  --color-accent-lavender: #e9d5ff;
-  --color-accent-indigo: #818cf8;
+  --color-accent-cyan: #00f2ff;
+  --color-accent-green: #00ff9d;
+  --color-accent-lavender: #d580ff;
+  --color-accent-indigo: #5e5ce6;
   /* Lighter indigo for visibility */
 
   /* Glassmorphism */
